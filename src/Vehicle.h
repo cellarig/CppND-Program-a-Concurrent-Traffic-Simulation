@@ -31,11 +31,8 @@ private:
     // typical behaviour methods
     void drive();
 
-    std::shared_ptr<Street>
-        _currStreet; // street on which the vehicle is currently on
-    std::shared_ptr<Intersection>
-        _currDestination; // destination to which the vehicle is currently
-    // driving
+    std::shared_ptr<Street> _currStreet; // street on which the vehicle is currently on
+    std::shared_ptr<Intersection> _currDestination; // destination to which the vehicle is currently driving
     double _posStreet; // position on current street
     double _speed; // ego speed in m/s
 };

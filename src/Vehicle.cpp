@@ -51,9 +51,7 @@ void Vehicle::drive()
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
         // compute time difference to stop watch
-        long timeSinceLastUpdate = std::chrono::duration_cast<std::chrono::milliseconds>(
-            std::chrono::system_clock::now() - lastUpdate)
-                                       .count();
+        long timeSinceLastUpdate = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - lastUpdate).count();
         if (timeSinceLastUpdate >= cycleDuration) {
             // update position with a constant velocity motion model
             _posStreet += _speed * timeSinceLastUpdate / 1000;
@@ -64,9 +62,7 @@ void Vehicle::drive()
             // compute current pixel position on street based on driving direction
             std::shared_ptr<Intersection> i1, i2;
             i2 = _currDestination;
-            i1 = i2->getID() == _currStreet->getInIntersection()->getID()
-                ? _currStreet->getOutIntersection()
-                : _currStreet->getInIntersection();
+            i1 = i2->getID() == _currStreet->getInIntersection()->getID() ? _currStreet->getOutIntersection() : _currStreet->getInIntersection();
 
             double x1, y1, x2, y2, xv, yv, dx, dy, l;
             i1->getPosition(x1, y1);
@@ -81,9 +77,7 @@ void Vehicle::drive()
             // check wether halting position in front of destination has been reached
             if (completion >= 0.9 && !hasEnteredIntersection) {
                 // request entry to the current intersection (using async)
-                auto ftrEntryGranted = std::async(&Intersection::addVehicleToQueue,
-                    _currDestination,
-                    get_shared_this());
+                auto ftrEntryGranted = std::async(&Intersection::addVehicleToQueue, _currDestination, get_shared_this());
 
                 // wait until entry has been granted
                 ftrEntryGranted.get();
