@@ -84,11 +84,8 @@ void TrafficLight::cycleThroughPhases() {
                           ? TrafficLightPhase::green
                           : TrafficLightPhase::red;
 
-      // send cycle update (using async)
-      auto ftr_phase_update =
-          std::async(std::launch::async, &MessageQueue<TrafficLightPhase>::send,
-                     _phase_queue, std::move(_currentPhase));
-      ftr_phase_update.wait();
+      // send cycle update
+      _phase_queue->send(std::move(_currentPhase));
 
       // reset stop watch for next cycle
       lastUpdate = std::chrono::system_clock::now();

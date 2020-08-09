@@ -40,9 +40,6 @@ class TrafficLight : public TrafficObject {
   void cycleThroughPhases();
 
   std::shared_ptr<MessageQueue<TrafficLightPhase>> _phase_queue;
-
-  std::condition_variable _condition;
-  std::mutex _mutex;
   TrafficLightPhase _currentPhase;
 };
 
