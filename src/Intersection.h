@@ -11,6 +11,7 @@
 // forward declarations to avoid include cycle
 class Street;
 class Vehicle;
+class TrafficLight;
 
 // auxiliary class to queue and dequeue waiting vehicles in a thread-safe manner
 class WaitingVehicles {
@@ -51,6 +52,7 @@ private:
     // private members
     std::vector<std::shared_ptr<Street>> _streets; // list of all streets connected to this intersection
     WaitingVehicles _waitingVehicles; // list of all vehicles and their associated promises waiting to enter the intersection
+    TrafficLight _trafficLight; // traffic light object at the intersecton
     bool _isBlocked; // flag indicating wether the intersection is blocked by a vehicle
 };
 
